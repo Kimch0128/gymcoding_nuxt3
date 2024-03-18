@@ -1,10 +1,11 @@
 <template>
   <q-card class="card">
-    <q-card-section v-if="$slots.header" class="card__header">
+    <q-card-section v-if="$slots.header || true" class="card__header">
       <slot name="header"></slot>
     </q-card-section>
 
     <q-card-section class="card__body">
+      {{ title }}
       <slot></slot>
     </q-card-section>
 
@@ -15,7 +16,15 @@
     </q-card-actions>
   </q-card>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+export interface Props {
+  title?: string;
+}
+
+withDefaults(defineProps<Props>(), {
+  title: 'testTitle',
+});
+</script>
 
 <style scoped>
 .card__header {
