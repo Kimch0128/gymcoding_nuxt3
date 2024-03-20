@@ -5,7 +5,6 @@
     </q-card-section>
 
     <q-card-section class="card__body">
-      {{ title }}
       <slot></slot>
     </q-card-section>
 
@@ -21,9 +20,7 @@ export interface Props {
   title?: string;
 }
 
-withDefaults(defineProps<Props>(), {
-  title: 'testTitle',
-});
+defineProps<Props>();
 </script>
 
 <style scoped>
