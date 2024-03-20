@@ -13,9 +13,9 @@
 
 <script setup lang="ts">
 interface Props {
-  thumbnail: String;
-  title: String;
-  subtitle: String;
+  thumbnail: string;
+  title: string;
+  subtitle: string;
 }
 
 defineProps<Props>();
