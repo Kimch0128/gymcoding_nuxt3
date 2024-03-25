@@ -13,4 +13,6 @@ export default defineNuxtConfig({
       },
     ],
   },
+  ssr: true, // universal로 동작함(server-side + client-side)
+  // ssr: false, // SPA로동작함
 });
