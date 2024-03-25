@@ -90,6 +90,7 @@
             @click="movePage(nextCourse.path)"
           />
         </ClientOnly>
+        <!--timestamp로 인해 하이드레이션 오류를 방지-->
       </template>
     </AppCard>
   </div>
