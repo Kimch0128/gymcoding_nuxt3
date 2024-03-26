@@ -133,24 +133,39 @@ definePageMeta({
   // keepalive: true,
   alias: ['/lecture/:courseSlug'],
   // layout: 'same-layout',
-  validate: (route) => {
-    // 렌더링 이전에 체크
+  // validate: (route) => {
+  //   // 렌더링 이전에 체크
+  //   const courseSlug = route.params.courseSlug as string;
+  //   const { course } = useCourse(courseSlug);
+
+  //   if (!course) {
+  //     // return false;
+  //     throw createError({
+  //       statusCode: 404,
+  //       statusMessage: 'Course not found',
+  //       // fatal: true, // 클라이언트에서 발생한 비 치명적 오류도 치명적 오류로 해석하게 만듬
+  //       data: {
+  //         // 사용자 정의 필드
+  //         myCustomField: true,
+  //       },
+  //     });
+  //   }
+  //   return true;
+  // },
+  middleware: (route) => {
     const courseSlug = route.params.courseSlug as string;
     const { course } = useCourse(courseSlug);
 
     if (!course) {
-      // return false;
-      throw createError({
-        statusCode: 404,
-        statusMessage: 'Course not found',
-        // fatal: true, // 클라이언트에서 발생한 비 치명적 오류도 치명적 오류로 해석하게 만듬
-        data: {
-          // 사용자 정의 필드
-          myCustomField: true,
-        },
-      });
+      // return navigateTo('/');
+      return abortNavigation(
+        createError({
+          statusCode: 404,
+          statusMessage: 'Course not found',
+          fatal: true, // 클라이언트에서 발생한 비 치명적 오류도 치명적 오류로 해석하게 만듬
+        }),
+      );
     }
-    return true;
   },
 });
 
