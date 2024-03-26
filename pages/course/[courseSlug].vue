@@ -114,7 +114,7 @@ if (!course) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Course not found',
-    fatal: true, // 클라이언트에서 발생한 비 치명적 오류도 치명적 오류로 해석하게 만듬
+    // fatal: true, // 클라이언트에서 발생한 비 치명적 오류도 치명적 오류로 해석하게 만듬
     data: {
       // 사용자 정의 필드
       myCustomField: true,
@@ -127,7 +127,7 @@ console.log('[courseSlug].vue 컴포넌트 setup hook');
 definePageMeta({
   key: (route) => route.fullPath,
   pageType: '',
-  keepalive: true,
+  // keepalive: true,
   alias: ['/lecture/:courseSlug'],
   // layout: 'same-layout',
 });
