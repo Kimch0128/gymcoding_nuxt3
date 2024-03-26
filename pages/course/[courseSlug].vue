@@ -110,26 +110,48 @@ const route = useRoute();
 const courseSlug = route.params.courseSlug as string;
 const { course, prevCourse, nextCourse } = useCourse(courseSlug);
 
-if (!course) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Course not found',
-    // fatal: true, // 클라이언트에서 발생한 비 치명적 오류도 치명적 오류로 해석하게 만듬
-    data: {
-      // 사용자 정의 필드
-      myCustomField: true,
-    },
-  });
-}
+// 랜더링 이후에 체크
+// Route Validation으로 변경
+// if (!course) {
+//   throw createError({
+//     statusCode: 404,
+//     statusMessage: 'Course not found',
+//     // fatal: true, // 클라이언트에서 발생한 비 치명적 오류도 치명적 오류로 해석하게 만듬
+//     data: {
+//       // 사용자 정의 필드
+//       myCustomField: true,
+//     },
+//   });
+// }
 
 console.log('[courseSlug].vue 컴포넌트 setup hook');
 
+// 컴파일완료 후 setup이 아닌 전역 namespace에 존재함
 definePageMeta({
   key: (route) => route.fullPath,
   pageType: '',
   // keepalive: true,
   alias: ['/lecture/:courseSlug'],
   // layout: 'same-layout',
+  validate: (route) => {
+    // 렌더링 이전에 체크
+    const courseSlug = route.params.courseSlug as string;
+    const { course } = useCourse(courseSlug);
+
+    if (!course) {
+      // return false;
+      throw createError({
+        statusCode: 404,
+        statusMessage: 'Course not found',
+        // fatal: true, // 클라이언트에서 발생한 비 치명적 오류도 치명적 오류로 해석하게 만듬
+        data: {
+          // 사용자 정의 필드
+          myCustomField: true,
+        },
+      });
+    }
+    return true;
+  },
 });
 
 const memo = ref('');
