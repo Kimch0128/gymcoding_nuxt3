@@ -14,4 +14,8 @@ const handleLoginSuccess = async () => {
   const redirect = isAdmin.value ? '/admin' : '/';
   await navigateTo(redirect);
 };
+
+definePageMeta({
+  middleware: ['guest-only'],
+});
 </script>
