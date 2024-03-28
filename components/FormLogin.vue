@@ -24,9 +24,10 @@ const emit = defineEmits<{
   success: [];
 }>();
 // const emit = defineEmits(['success']);
-
-const { signIn } = useAuth();
-
+// useState
+// const { signIn } = useAuth();
+// Pinia
+const { signIn } = useAuthStore();
 const form = ref({
   email: '',
   password: '',

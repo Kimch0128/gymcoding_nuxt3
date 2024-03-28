@@ -1,6 +1,10 @@
 export default defineNuxtRouteMiddleware(() => {
-  const isAdmin = useAdmin();
-  const isAuthenticated = useAuthenticated();
+  // useState
+  // const isAdmin = useAdmin();
+  // const isAuthenticated = useAuthenticated();
+
+  // Pinia
+  const { isAdmin, isAuthenticated } = storeToRefs(useAuthStore());
 
   if (!isAuthenticated.value) {
     return navigateTo('/login');
