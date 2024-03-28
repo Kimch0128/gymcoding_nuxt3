@@ -28,6 +28,7 @@ const emit = defineEmits<{
 // const { signIn } = useAuth();
 // Pinia
 const { signIn } = useAuthStore();
+
 const form = ref({
   email: '',
   password: '',

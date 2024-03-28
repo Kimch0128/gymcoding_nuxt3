@@ -40,6 +40,7 @@
           </q-list>
         </q-btn-dropdown>
         <q-separator dark vertical />
+        <!-- <ClientOnly> -->
         <NuxtLink
           v-if="!isAuthenticated"
           v-slot="{ navigate }"
@@ -71,12 +72,15 @@
           no-caps
           @click="signOut()"
         />
+        <!-- </ClientOnly> -->
       </q-toolbar>
     </q-header>
     <q-page-container :style="pageContainerStyle">
+      <!-- <ClientOnly> -->
       <q-banner v-if="isAuthenticated" class="bg-primary text-white">
         {{ authUser }}
       </q-banner>
+      <!-- </ClientOnly> -->
       <slot></slot>
     </q-page-container>
   </q-layout>
