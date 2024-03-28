@@ -30,6 +30,14 @@
         <div>
           <q-btn label="clear" @click="clearNuxtState()" />
         </div>
+        <div class="q-gutter-y-sm q-mt-md">
+          <div class="text-subtitle1 text-weight-bold">useCountStore</div>
+          <div>counter: {{ count }}</div>
+          <div>counter: {{ doubleCount }}</div>
+          <div>
+            <q-btn label="Increment" @click="countStore.increment" />
+          </div>
+        </div>
       </div>
     </div>
   </q-page>
@@ -38,4 +46,9 @@
 <script setup lang="ts">
 const counter = useState<number>('counter', () => 1);
 const sameCounter = useState<number>('counter');
+
+// Pinia
+const countStore = useCountStore();
+// 구조분해 할당
+const { count, doubleCount } = storeToRefs(countStore);
 </script>
