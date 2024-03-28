@@ -82,7 +82,8 @@
   </q-layout>
 </template>
 <script setup lang="ts">
-const { authUser, isAuthenticated } = useAuthUser();
+const authUser = useAuthUser();
+const isAuthenticated = useAuthenticated();
 const { signOut } = useAuth();
 
 const pageContainerStyle = computed(() => ({
