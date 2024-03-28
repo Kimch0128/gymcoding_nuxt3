@@ -4,7 +4,8 @@ export default defineNuxtPlugin(({ vueApp }) => {
   const i18n = createI18n({
     legacy: false,
     globalInjection: true,
-    locale: useDefaultLocale().value,
+    // locale: useDefaultLocale().value,//쿠키적용전
+    locale: useCookie('locale').value || useDefaultLocale().value, // 쿠키적용후
     messages: {
       en: {
         home: 'Home',
