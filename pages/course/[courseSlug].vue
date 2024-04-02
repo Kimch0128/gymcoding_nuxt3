@@ -108,7 +108,7 @@
 <script setup lang="ts">
 const route = useRoute();
 const courseSlug = route.params.courseSlug as string;
-const { course, prevCourse, nextCourse } = useCourse(courseSlug);
+const { course, prevCourse, nextCourse } = await useCourse(courseSlug);
 
 // 랜더링 이후에 체크
 // Route Validation으로 변경
@@ -152,9 +152,9 @@ definePageMeta({
   //   }
   //   return true;
   // },
-  middleware: (route) => {
+  middleware: async (route) => {
     const courseSlug = route.params.courseSlug as string;
-    const { course } = useCourse(courseSlug);
+    const { course } = await useCourse(courseSlug);
 
     if (!course) {
       // return navigateTo('/');
