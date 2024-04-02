@@ -2,7 +2,9 @@
 import type { CourseWithPath } from '~/types/course';
 
 interface CourseReturn {
-  courses: CourseWithPath[];
+  // courses: CourseWithPath[];
+  // 강의보강 - useFetch의 제네릭 사용
+  courses: Maybe<CourseReturn[]>;
 }
 
 export const useCourses = async (): Promise<CourseReturn> => {
@@ -13,7 +15,9 @@ export const useCourses = async (): Promise<CourseReturn> => {
   //   studentCount: item.studentCount.toLocaleString(),
   //   path: `/course/${item.courseSlug}`,
   // }));
-  const { data, error } = await useFetch('/api/courses');
+  // 강의보강 - useFetch의 제네릭 사용
+  const { data, error } = await useFetch<CourseReturn>('/api/courses');
+  // const { data, error } = await useFetch('/api/courses');
 
   if (error.value) {
     throw createError({
@@ -22,6 +26,8 @@ export const useCourses = async (): Promise<CourseReturn> => {
   }
   return {
     // 타입단원
-    courses: data.value as CourseWithPath[],
+    // 강의보강 - useFetch의 제네릭 사용
+    courses: data.value,
+    // courses: data.value as CourseWithPath[],
   };
 };

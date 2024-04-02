@@ -108,7 +108,8 @@
 <script setup lang="ts">
 const route = useRoute();
 const courseSlug = route.params.courseSlug as string;
-const { course, prevCourse, nextCourse } = await useCourse(courseSlug);
+// 강의보강 - useFetch의 제네릭 사용, null 인경우 구조분해 할당이 불가능 하기때문에 빈객체일수도 있는걸로
+const { course, prevCourse, nextCourse } = (await useCourse(courseSlug)) || {};
 
 // 랜더링 이후에 체크
 // Route Validation으로 변경
@@ -154,7 +155,8 @@ definePageMeta({
   // },
   middleware: async (route) => {
     const courseSlug = route.params.courseSlug as string;
-    const { course } = await useCourse(courseSlug);
+    // 강의보강 - useFetch의 제네릭 사용, null 인경우 구조분해 할당이 불가능 하기때문에 빈객체일수도 있는걸로
+    const { course } = (await useCourse(courseSlug)) || {};
 
     if (!course) {
       // return navigateTo('/');

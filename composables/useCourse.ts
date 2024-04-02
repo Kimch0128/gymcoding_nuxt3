@@ -1,6 +1,10 @@
 import type { CourseReturn } from '~/types/course';
 
-export const useCourse = async (courseSlug: string): Promise<CourseReturn> => {
+// export const useCourse = async (courseSlug: string): Promise<CourseReturn> => {
+// 강의보강내용 - useFetch의 제네릭사용
+export const useCourse = async (
+  courseSlug: string,
+): Promise<Maybe<CourseReturn>> => {
   // const { courses } = await useCourses();
   // // const course = courses.find((course) => course.courseSlug === courseSlug);
   // const index = courses.findIndex((course) => course.courseSlug === courseSlug);
@@ -13,7 +17,11 @@ export const useCourse = async (courseSlug: string): Promise<CourseReturn> => {
   //   nextCourse,
   // };
 
-  const { data, error } = await useFetch(`/api/courses/${courseSlug}`);
+  // 강의보강내용 - useFetch의 제네릭사용
+  const { data, error } = await useFetch<Maybe<CourseReturn>>(
+    `/api/courses/${courseSlug}`,
+  );
+  // const { data, error } = await useFetch(`/api/courses/${courseSlug}`);
 
   if (error.value) {
     throw createError({
@@ -21,5 +29,7 @@ export const useCourse = async (courseSlug: string): Promise<CourseReturn> => {
     });
   }
 
+  // 강의보강내용 - useFetch의 제네릭사용
+  // return data.value;
   return data.value as CourseReturn;
 };
