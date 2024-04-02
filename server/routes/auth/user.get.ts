@@ -1,14 +1,23 @@
 export default defineEventHandler((event) => {
-  const userJsonString = getCookie(event, '__user');
+  // 미들웨어에서 가져옴
+  const user = event.context.user;
+  // const user = getUserFromEvent(event);
 
-  console.log('userJsonString', userJsonString);
-
-  if (!userJsonString) {
+  if (!user) {
     return { user: null };
   }
 
-  const user = JSON.parse(userJsonString);
-  return {
-    user,
-  };
+  return { user };
+  // const userJsonString = getCookie(event, '__user');
+
+  // console.log('userJsonString', userJsonString);
+
+  // if (!userJsonString) {
+  //   return { user: null };
+  // }
+
+  // const user = JSON.parse(userJsonString);
+  // return {
+  //   user,
+  // };
 });
