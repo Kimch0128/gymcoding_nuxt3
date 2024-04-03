@@ -1,5 +1,9 @@
 <template>
   <div>
+    <!-- <Head>
+      <Title>{{ title }}</Title>
+      <Meta name="description" :content="description"
+    /></Head> -->
     <AppCard>
       <template #header>
         <div class="text-h5 text-weight-medium">{{ course?.title }}</div>
@@ -110,6 +114,14 @@ const route = useRoute();
 const courseSlug = route.params.courseSlug as string;
 // 강의보강 - useFetch의 제네릭 사용, null 인경우 구조분해 할당이 불가능 하기때문에 빈객체일수도 있는걸로
 const { course, prevCourse, nextCourse } = (await useCourse(courseSlug)) || {};
+
+// const title = computed(() => course?.title);
+// const description = computed(() => course?.content);
+
+useSeoMeta({
+  title: () => course?.title || '',
+  description: () => course?.content || '',
+});
 
 // 랜더링 이후에 체크
 // Route Validation으로 변경

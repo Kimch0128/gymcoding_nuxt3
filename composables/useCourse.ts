@@ -18,9 +18,11 @@ export const useCourse = async (
   // };
 
   // 강의보강내용 - useFetch의 제네릭사용
-  const { data, error } = await useFetch<Maybe<CourseReturn>>(
+  const { data, error } = await useFetch<CourseReturn>(
     `/api/courses/${courseSlug}`,
   );
+
+  console.log('data :', data);
   // const { data, error } = await useFetch(`/api/courses/${courseSlug}`);
 
   if (error.value) {
@@ -30,6 +32,6 @@ export const useCourse = async (
   }
 
   // 강의보강내용 - useFetch의 제네릭사용
-  // return data.value;
-  return data.value as CourseReturn;
+  return data.value;
+  // return data.value as CourseReturn;
 };
