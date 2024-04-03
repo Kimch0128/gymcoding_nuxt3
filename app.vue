@@ -19,6 +19,6 @@ useSeoMeta({
   ogTitle: title,
   ogDescription: description,
   ogType: 'website',
-  ogImage: '/img/og-image.png',
+  ogImage: '/img/og-image.png', // sns에 공유할때 보이는사진, public 하위 디렉토리에 위치해서 root에서 접근이 가능하다.
 });
 </script>
