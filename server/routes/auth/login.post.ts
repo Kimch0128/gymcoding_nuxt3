@@ -1,6 +1,7 @@
 import { getUserByEmail } from '~/server/model/user';
 
 export default defineEventHandler(async (event) => {
+  const config = useRuntimeConfig();
   // post 요청에서 request의 body 데이터를 얻음
   const body = readBody<{ email: string; password: string }>(event);
 
@@ -35,7 +36,7 @@ export default defineEventHandler(async (event) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { password: _password, ...userWithoutpassword } = userWithPassword;
 
-  setCookie(event, '__user', JSON.stringify(userWithoutpassword));
+  setCookie(event, config.authCookieName, JSON.stringify(userWithoutpassword));
 
   return {
     user: userWithoutpassword,
